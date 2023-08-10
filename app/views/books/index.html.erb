@@ -1,0 +1,26 @@
+<h1>Books</h1>
+<% @books.each do |book| %>
+  <p><%= book.title %></p>
+  <p><%= book.body %></p>
+    <%= link_to "Show", book_path(book.id) %>
+    <%= link_to "Edit", book_path(book.id) %>
+    <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+<% end %>
+
+<h1>New book</h1>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>error prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @book do |b| %>
+  <h4>Title</h4>
+  <%= b. text_field :title %>
+  <h4>Body</h4>
+  <%= b. text_area :body %>
+  <p><%= b. submit 'Create Book' %></p>
+<% end %>
